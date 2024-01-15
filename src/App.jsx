@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import WeatherDetail from "./components/WeatherDetail";
+import LoadApp from "./components/LoadApp";
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -17,14 +18,14 @@ function App() {
 
   const getBackgroundClass = () => {
     const weatherIcon = weather?.weather[0].icon;
-    return bgImg[weatherIcon] || "bg-[url(/bgsun.jpg)]";
+    return bgImg[weatherIcon] || "bg-black";
   };
 
   const bgImg = {
     "04d" : "bg-[url(/bgcloudy.jpg)]",
     "04n" : "bg-[url(/bgcloudyn.jpg)]",
     "01d" : "bg-[url(/bgsun.jpg)]",
-    "01n" : "bg-[url(/bgsunn.jpg)]",
+    "01n" : "bg-[url(/bgsunn.webp)]",
     "02d" : "bg-[url(/bgfewclouds.jpg)]",
     "02n" : "bg-[url(/bgfewcloudsn.jpg)]",
     "03d" : "bg-[url(/bgcloudy.jpg)]",
@@ -42,7 +43,7 @@ function App() {
 
   return (
     <main className={`flex justify-center items-center h-screen text-white bg-cover ${getBackgroundClass()}`}>
-      {weather ? <WeatherDetail weather={weather} /> : <span className="text-black text-3xl">Cargando...</span>}
+      {weather ? <WeatherDetail weather={weather} /> : <LoadApp /> }
     </main>
   );
 }
